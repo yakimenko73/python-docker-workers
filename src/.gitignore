@@ -4,3 +4,5 @@ venv/
 tests/.pytest_cache/
 .idea/
 .worker.log
+
+static/*.db
