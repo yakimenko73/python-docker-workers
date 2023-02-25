@@ -1,8 +1,0 @@
-venv/
-.venv/
-.pytest_cache/
-tests/.pytest_cache/
-.idea/
-.worker.log
-
-static/*.db

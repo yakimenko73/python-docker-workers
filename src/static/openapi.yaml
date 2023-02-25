@@ -1,9 +1,9 @@
 openapi: 3.0.1
 info:
-  title: Scalr task todo api
-  description: 'This small api is used to manage todo tasks'
+  title: Python docker workers
+  description: 'This small api is used to manage and running tasks via docker containers'
   contact:
-    email: a.penchuk@scalr.com
+    email: r.yakimenko.73@gmail.com
   version: 1.0.0
 servers:
   - url: http://localhost:5000

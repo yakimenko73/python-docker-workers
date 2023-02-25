@@ -6,11 +6,8 @@ $(VENV)/bin/activate: requirements.txt
 	./$(VENV)/bin/pip install -r requirements.txt
 
 venv: $(VENV)/bin/activate
-run: venv worker
-	./$(VENV)/bin/python3 app.py
-
-worker: venv
-	./$(VENV)/bin/python3 app/worker.py > ./worker.log 2>&1 &
+run: venv
+	./$(VENV)/bin/python3 src/app.py
 
 clean:
 	rm -rf $(VENV)

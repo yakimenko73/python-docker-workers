@@ -1,17 +1,13 @@
 import flask
-from flask import request
+from flask import request, current_app
 
-from .database import Task
+from .db.models import Task
 
 blueprint = flask.Blueprint("tasks", __name__)
-
-# TODO: Move to config needed :)
-TASKS_MAX_COUNT = 100
 
 
 @blueprint.route('/tasks', methods=['GET'])
 def get_tasks():
-    """List all tasks"""
     tasks = Task.select()
     return flask.jsonify({
         "data": [task.to_response(flask.request.base_url) for task in tasks]
@@ -20,7 +16,6 @@ def get_tasks():
 
 @blueprint.route('/tasks', methods=['POST'])
 def create_task():
-    """Create the new docker task"""
     if "data" not in flask.request.json:
         return flask.jsonify({"message": "data is required"}), 400
 
@@ -31,7 +26,7 @@ def create_task():
         return flask.jsonify({"message": "data.attributes.title is required"}), 400
 
     tasks_total_count = Task.select().count()
-    if tasks_total_count >= TASKS_MAX_COUNT:
+    if tasks_total_count >= current_app.config['MAX_TASKS_COUNT']:
         return flask.jsonify({"message": "Max tasks number exceeded"}), 400
 
     task = Task.create(
@@ -46,7 +41,6 @@ def create_task():
 
 @blueprint.route('/tasks/<int:id_>', methods=['GET'])
 def get_task_by_id(id_: int):
-    """Get task by id"""
     task = Task.get_or_none(id_)
 
     if not task:
@@ -57,7 +51,6 @@ def get_task_by_id(id_: int):
 
 @blueprint.route('/tasks/<int:id_>', methods=['PATCH'])
 def update_task_by_id(id_: int):
-    """Update task by id"""
     task = Task.get_or_none(id_)
 
     if not task:
@@ -71,7 +64,6 @@ def update_task_by_id(id_: int):
 
 @blueprint.route('/tasks/<int:id_>', methods=['DELETE'])
 def delete_task_by_id(id_: int):
-    """Delete task by id"""
     task = Task.get_or_none(id_)
 
     if not task:
@@ -87,7 +79,6 @@ def delete_task_by_id(id_: int):
 
 @blueprint.route('/tasks/<int:id_>/logs', methods=['GET'])
 def get_task_logs_by_id(id_: int):
-    """Get task logs by id"""
     task = Task.get_or_none(id_)
 
     if not task:

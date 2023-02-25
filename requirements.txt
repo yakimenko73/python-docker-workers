@@ -4,3 +4,4 @@ docker
 pytest
 swagger-ui-py
 loguru
+pydantic

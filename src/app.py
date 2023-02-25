@@ -1,14 +1,14 @@
 import multiprocessing
 
 import app
-from app import database
-from app.worker import Worker
+from app import db
+from app.docker.worker import WorkersManager
 
 if __name__ == '__main__':
-    app = app.create_app()
-    database.init_database(app.config['TESTING'])
+    app = app.create()
+    db.init(app.config['TESTING'])
 
-    worker = Worker()
+    worker = WorkersManager()
     process = multiprocessing.Process(target=worker.start)
     process.start()
 

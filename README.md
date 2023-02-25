@@ -1,99 +1,42 @@
-# Scalr Coding Test
+# <p align="center">Python docker workers</p>
 
-## Guidelines
+[![Pray for Ukraine](https://img.shields.io/badge/made_in-ukraine-ffd700.svg?labelColor=0057b7)](https://stand-with-ukraine.pp.ua)
+[![Licence](https://img.shields.io/github/license/yakimenko73/python-docker-workers)](https://github.com/yakimenko73/pyhon-docker-workers/blob/master/LICENSE)
 
-Thanks for interviewing with Scalr! We're excited to have you participating in our testing exercise.
+## What is it?
 
+This small api is used to manage and running tasks via docker containers
 
-## Prerequisites
+### Built With
 
-[Install Docker](https://docs.docker.com/install/).
+* [Python 3.x](https://www.python.org/)
+* [Loguru](https://github.com/Delgan/loguru)
+* [Pydantic](https://github.com/pydantic/pydantic)
 
-Install GNU Make.
+### Installation
+
+Requires Docker and GNU Make
 
 Run the application:
+
 ```sh
 make run
 ```
 
-## The Exercise
+## Contributing
 
-This repository includes an example API application built with [Flask](https://palletsprojects.com/p/flask/).
-For the data layer we use [peewee](http://docs.peewee-orm.com/en/latest/) ORM.
-Application also requires [docker](https://docs.docker.com/engine/install/) installed on the machine.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
+contributions you make are **greatly appreciated**.
 
-The API interface is described in [OpenAPI 3](https://swagger.io/docs/specification/about/) format in
-the [openapi.yaml](backend-coding-exercise-scalr-main/static/openapi.yaml) file. The API semantics is based on [json-api](https://jsonapi.org/) specification.
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
+simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
 
-This API documentation is accessible by the [app index url](http://127.0.0.1:5000/) as
-soon as you've started the app.
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/amazing-feature`)
+3. Commit your Changes (`git commit -m 'Add some amazing-feature'`)
+4. Push to the Branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-> ### Note 
-> If any technologies are more convenient for you feel free to change any part of the tech stack, for example, peewee to any other ORM of flask to fastapi etc
+## Contact
 
-### Objective
-
-Your goal is to finalize the API that is described in the OpenAPI 3 document.
-
-This work includes fixing and updating the existing code as well as implementing some new features.
-
-You are also welcome to make any changes to the OpenAPI 3 spec that you deem
-appropriate. Just make sure all the required functionality is still
-present and the final implementation and spec match.
-
-### API Description
-
-We build a service for executing tasks inside the docker container.
-The customer could create and execute the task with a command
-Examples:
-```http request
-POST http://127.0.0.1:5000/tasks
-Content-Type: application/json
-
-{
-  "data": {
-    "attributes": {
-      "title": "hello world ubuntu",
-      "description": "Run hello world in ubuntu",
-      "command": "echo hello world",
-      "image": "ubuntu"
-    }
-  }
-}
-```
-
-Get logs
-```http request
-GET /tasks/{id}/logs
-```
-
-### Feature Requirements
-
- - CRUD operations for tasks:
-   - Do your own best judgement over what fields could be updated
-   - Running task could not be deleted
- - Operation to get a task logs.
- - Task command must be executed inside the docker container
- - Task status should be updated according to the command execution status.
- - All tasks must be running in the background and not blocking the API server (See app/worker.py)
- ### Constraints
- 
- - At most 100 tasks could be created, API should not allow to create more without deleting any existing tasks before.
- - At most 2 concurrent tasks could run at any given moment. Tasks should be handled in a FIFO manner.
- - Cover most important parts of your code with tests.
- - Valid OpenAPI specification.
-
-### Tests
-
-```python
-pytest tests
-```
-
-### Extra Questions (If you have a time)
-
-- If we need to limit task in compute resources: e.g. CPU / Memory, how would you do it?
-- How to limit task execution time?
-- How would you approach task cancellation?
-- How would you add authorization to the API? What authz type would you pick and why?
-- What kind of test levels do you think this system needs and why?
-- When you'll be ready to ship this code to production, how would you deploy it?
+* Email - r.yakimenko.73@gmail.com
