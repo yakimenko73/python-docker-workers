@@ -2,6 +2,7 @@
 
 [![Pray for Ukraine](https://img.shields.io/badge/made_in-ukraine-ffd700.svg?labelColor=0057b7)](https://stand-with-ukraine.pp.ua)
 [![Licence](https://img.shields.io/github/license/yakimenko73/python-docker-workers)](https://github.com/yakimenko73/pyhon-docker-workers/blob/master/LICENSE)
+[![Code factor](https://www.codefactor.io/repository/github/yakimenko73/python-docker-workers/badge)](https://www.codefactor.io/repository/github/yakimenko73/python-docker-workers)
 
 ## What is it?
 
