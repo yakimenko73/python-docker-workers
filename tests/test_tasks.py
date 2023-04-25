@@ -1,6 +1,6 @@
 import pytest
 
-import app
+from src import init_app, db
 
 CREATE_TASK_REQUEST = {
     "data": {
@@ -16,9 +16,9 @@ CREATE_TASK_REQUEST = {
 
 @pytest.fixture
 def client():
-    api_app = app.create()
+    api_app = init_app()
     api_app.config['TESTING'] = True
-    app.db.init(api_app.config['TESTING'])
+    db.init(api_app.config['TESTING'])
 
     yield api_app.test_client()
 
