@@ -1,11 +1,10 @@
 import multiprocessing
 
-import app
-from app import db
-from app.docker.worker import WorkersManager
+from src import db, init_app
+from src.worker import WorkersManager
 
 if __name__ == '__main__':
-    app = app.create()
+    app = init_app()
     db.init(app.config['TESTING'])
 
     worker = WorkersManager()

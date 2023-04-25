@@ -2,8 +2,8 @@ from datetime import datetime
 
 import pydantic
 
-from app.db.models import Task
-from . import client as DockerClient
+from src import docker_client
+from src.db.models import Task
 
 
 class TaskExecutionResult(pydantic.BaseModel):
@@ -13,7 +13,7 @@ class TaskExecutionResult(pydantic.BaseModel):
 
 def execute_task_in_container(task: Task) -> TaskExecutionResult:
     start_time = datetime.now()
-    container = DockerClient.containers.run(task.image, task.command, detach=True)
+    container = docker_client.containers.run(task.image, task.command, detach=True)
     end_time = datetime.now()
     logs = container.logs().decode('utf-8')
 

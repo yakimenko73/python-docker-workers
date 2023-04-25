@@ -2,12 +2,12 @@ import enum
 
 import peewee
 
-from . import db
+from src import db
 
 
 class Task(peewee.Model):
     class Meta:
-        database = db
+        database = db.proxy
 
     class Status(str, enum.Enum):
         pending = 'pending'

@@ -5,8 +5,8 @@ import time
 from docker.errors import ContainerError
 from loguru import logger
 
-from app.db.models import Task
-from . import utils
+from src.db.models import Task
+from src.utils import execute_task_in_container
 
 
 class WorkersManager:
@@ -56,7 +56,7 @@ class WorkerThread(threading.Thread):
         task.update(status=Task.Status.running).execute()
 
         try:
-            result = utils.execute_task_in_container(task)
+            result = execute_task_in_container(task)
             task.set_finished_status(result.execution_time, result.logs)
 
             logger.info(f"Task: {task.id} finished | Output: {result.logs}")
